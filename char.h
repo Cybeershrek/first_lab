@@ -4,10 +4,8 @@
 #include "TypeInfo.h"
 
 static TypeInfo* CHAR_TYPE_INFO = NULL;
-void concaten(void* string1, void* string2, void* result);
-void recoding(void* string1, void* recult);
+void concaten(const void* string1,const void* string2, void* result);
+void recoding(const void* string1, const void* offset, void* recult);
 TypeInfo* GetCharTypeInfo();
-
-
 
 #endif

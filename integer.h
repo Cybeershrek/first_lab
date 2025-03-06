@@ -3,8 +3,8 @@
 
 #include "TypeInfo.h"
 
-static TypeInfo* Int_Type_Info = NULL;
-void get_substring(void* string1, void* arg1, void* arg2);
-TypeInfo* GetIntTyprInfo();
+static TypeInfo* INT_TYPE_INFO = NULL;
+void get_substring(const void* string, const void* arg1, const void* arg2, void* result);
+TypeInfo* GetIntTypeInfo();
 
 #endif

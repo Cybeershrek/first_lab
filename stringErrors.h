@@ -2,7 +2,11 @@
 #define STRINGERRORS_H
 
 typedef enum{
-
+    STRING_OPERATION_OK = 0,
+    MEMORY_ALLOCATION_FAILED = 10,
+    STRING_NOT_DEFINED = 20,
+    OPERATION_NOT_DEFINED = 21,
+    INDEX_OUT_OF_THE_RANGE = 30,
 } StringErrors;
 
 #endif 

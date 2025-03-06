@@ -9,9 +9,9 @@ typedef void (*Operaions)(void* string1, void* string2, const void* arg1, const 
 
 typedef struct {
     size_t size;
-    Operaions concaten;  // процесс конкатенации
-    Operaions get_substring; // получение подстроки
-    Operaions recoding; // перекодирование
+    Operaions con;  // процесс конкатенации
+    Operaions get_sub; // получение подстроки
+    Operaions rec; // перекодирование
     void(*print)(const void*);
 }TypeInfo;
 
