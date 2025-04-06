@@ -12,6 +12,8 @@ typedef struct {
     Operaions con;  // процесс конкатенации
     Operaions get_sub; // получение подстроки
     Operaions rec; // перекодирование
+    Operaions split; // разбиение одной строки на несколько
+    Operaions find_sub; // нахождение подстроки
     void(*print)(const void*);
 }TypeInfo;
 

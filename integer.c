@@ -1,6 +1,6 @@
 #include "my_string.h"
 
-void int_get_substring(const void* string, const void* i, const void* j, void* result){
+void get_substring(const void* string, const void* i, const void* j, void* result){
     int len = strlen((char*)string);
     int start = *(int*)i;
     int finish = *(int*)j;
