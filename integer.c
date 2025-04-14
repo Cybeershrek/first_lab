@@ -5,16 +5,16 @@ void get_substring(const void* string, const void* i, const void* j, void* resul
     int start = *(int*)i;
     int finish = *(int*)j;
     if ( start < 0 || finish < 0 || start > len || finish > len){
-        *(char*)result = NULL;
-        return NULL;
+        result = NULL;
+        return ;
     }
     int lensub = abs(finish - start) + 2;
     char* tempStr = (char*)malloc(lensub * sizeof(char));
-    for (int k = start; k < finish; k++){
-        tempStr[k] = ((char*)string)[k];
+    for (int k = 0; k < finish - start; k++) {
+        tempStr[k] = ((char*)string)[start + k];
     }
     tempStr[finish] = '\0';
-    memcpy(result, &tempStr, sizeof(char*));
+    memcpy(result, tempStr, strlen(tempStr) + 1);
     free(tempStr);
 }
 

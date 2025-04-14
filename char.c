@@ -1,64 +1,78 @@
 #include "my_string.h"
 
 void concaten(const void* char1, const void* char2, void* result){
-    int lenRes = strlen((char*)char1) + strlen((char*)char2);
+    int len1 = strlen((char*)char1);
+    int len2 = strlen((char*)char2);
+    int lenRes = len1 + len2;
     char* tempStr = (char*)malloc((lenRes + 1) * sizeof(char));
     if (tempStr == NULL){
-        *(char*)result = NULL;
-        return NULL;
+        result = NULL;
+        return ;
     }
-    for (int x = 0; x < strlen((char*)char1); x++){
-        tempStr[x] = ((char*)char1)[x];
-    }
-    for (int y = 0; y < strlen((char*)char2); y++){
-        tempStr[y + strlen((char*)char1)] = ((char*)char2)[y];
-    }
-    memcpy(result, &tempStr, sizeof(char*));
+    memcpy(tempStr, (char*)char1, len1);
+    emcpy(tempStr, (char*)char1, len1);
+    strcpy(tempStr + len1, (char*)char2);
+    memcpy(result, tempStr, lenRes + 1);
     free(tempStr);
 }
 
-
-void recoding(const void* string1, void* result){
-    int lenRes = strlen((char*)string1);
-    char* tempStr = (char*)malloc((lenRes + 1) * sizeof(char));
-    for (int i = 0; i < lenRes; i++){
+void recoding(const void* string1, void* result) {
+    int len = strlen((char*)string1);
+    char* tempStr = (char*)malloc(len + 1);
+    if (tempStr == NULL) {
+        ((char*)result)[0] = '\0';
+        return;
+    }
+    for (int i = 0; i < len; i++) {
         tempStr[i] = ((char*)string1)[i] - 1;
     }
-    memcpy(result, &tempStr, sizeof(char*)); 
+    tempStr[len] = '\0';
+    strcpy((char*)result, tempStr);
     free(tempStr);
 }
 
-void splitting(const void* string1, const void* char1, void* result){
-    int lenRes = strlen((char*)string1);
-    char* tempStr[lenRes];
-    for (int j = 0; j < lenRes; j++){
-        tempStr[j] = (char*)malloc((lenRes) * sizeof(char));
-    }
-    int point1 = 0, point2 = 0, i = 0;; 
-    for (point2; point2 < lenRes; point2++){
-        if (((char*)string1)[point1] == (char*)char1){
-            if (point1 == 0) {
-                point2 = point1 + 1;
-                continue;
+void splitting(const void* string1, const void* char1, void* result) {
+    const char* str = (char*)string1;
+    char char12 = *((char*)char1);
+    char** output = (char**)result;
+
+    int len = strlen(str);
+    int start = 0;
+    int partIndex = 0;
+
+    for (int i = 0; i <= len; i++) {
+        if (str[i] == char12 || str[i] == '\0') {
+            int partLen = i - start;
+            output[partIndex] = (char*)malloc(partLen + 1);
+
+            if (output[partIndex] == NULL) {
+                return;
             }
-            get_substring(string1, point1 - 1, point2, tempStr[i]);
-            point2 = point1 + 1;
+
+            strncpy(output[partIndex], str + start, partLen);
+            output[partIndex][partLen] = '\0';
+            partIndex++;
+            start = i + 1;
         }
     }
 }
+
 
 void find_substring(const void* string1, const void* string2, void* result){
     int lenstr1 = strlen((char*)string1);
     int lenstr2 = strlen((char*)string2);
     if (lenstr2 > lenstr1){
         *(char*)result = NULL;
-        return NULL;
+        return;
     } 
     int j = 0;
     for (int i = 0; i < lenstr1; i++){
         if (((char*)string1)[i] == ((char*)string2)[j]){
             j++;
-            if (j == lenstr2) *(int*)result = 1;
+            if (j == lenstr2) {
+                *(int*)result = 1;
+                return;
+            }
         } else{
             j = 0;
         }
