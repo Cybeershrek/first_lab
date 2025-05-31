@@ -5,7 +5,7 @@ void get_substring(const void* string, const void* i, const void* j, void* resul
     int start = *(int*)i;
     int finish = *(int*)j;
     if ( start < 0 || finish < 0 || start > len || finish > len){
-        result = NULL;
+        ((char*)result)[0] = '\0';
         return ;
     }
     int lensub = abs(finish - start) + 2;
@@ -13,7 +13,7 @@ void get_substring(const void* string, const void* i, const void* j, void* resul
     for (int k = 0; k < finish - start; k++) {
         tempStr[k] = ((char*)string)[start + k];
     }
-    tempStr[finish] = '\0';
+    tempStr[finish - start] = '\0';
     memcpy(result, tempStr, strlen(tempStr) + 1);
     free(tempStr);
 }
@@ -24,4 +24,5 @@ TypeInfo* GetIntTypeInfo() {
         INT_TYPE_INFO->size = sizeof(int);
         INT_TYPE_INFO->get_sub = get_substring;
     }
+    return INT_TYPE_INFO;
 }

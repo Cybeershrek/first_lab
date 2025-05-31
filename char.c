@@ -6,11 +6,10 @@ void concaten(const void* char1, const void* char2, void* result){
     int lenRes = len1 + len2;
     char* tempStr = (char*)malloc((lenRes + 1) * sizeof(char));
     if (tempStr == NULL){
-        result = NULL;
+        result;
         return ;
     }
     memcpy(tempStr, (char*)char1, len1);
-    emcpy(tempStr, (char*)char1, len1);
     strcpy(tempStr + len1, (char*)char2);
     memcpy(result, tempStr, lenRes + 1);
     free(tempStr);
@@ -62,7 +61,7 @@ void find_substring(const void* string1, const void* string2, void* result){
     int lenstr1 = strlen((char*)string1);
     int lenstr2 = strlen((char*)string2);
     if (lenstr2 > lenstr1){
-        *(char*)result = NULL;
+        *(int*)result = 0;;
         return;
     } 
     int j = 0;
@@ -87,4 +86,5 @@ TypeInfo* GetCharTypeInfo() {
         CHAR_TYPE_INFO->con = concaten;
         CHAR_TYPE_INFO->rec = recoding; 
     }
+    return CHAR_TYPE_INFO;
 }  

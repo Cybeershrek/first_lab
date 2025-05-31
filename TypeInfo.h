@@ -6,15 +6,16 @@
 #include <string.h>
 #include <locale.h>
 
-typedef void (*Operaions)(void* string1, void* string2, const void* arg1, const void* arg2, void* result);
+typedef void (*Char_Operation)(const void*, const void*, void*);
+typedef void (*Substring_Operation)(const void*, const void*, const void*, void*);
 
 typedef struct {
     size_t size;
-    Operaions con;  // процесс конкатенации
-    Operaions get_sub; // получение подстроки
-    Operaions rec; // перекодирование
-    Operaions split; // разбиение одной строки на несколько
-    Operaions find_sub; // нахождение подстроки
+    Char_Operation con;  // процесс конкатенации
+    Substring_Operation get_sub; // получение подстроки
+    Char_Operation rec; // перекодирование
+    Char_Operation split; // разбиение одной строки на несколько
+    Char_Operation find_sub; // нахождение подстроки
     void(*print)(const void*);
 }TypeInfo;
 

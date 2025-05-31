@@ -1,18 +1,24 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11
-TARGET = lab
-
-SRCS = main.c integer.c char.c my_string.h
-OBJS = $(SRCS:.c=.o)
-DEPS = char.h integer.h  my_string.h stringErros.h TypeInfo.h
+CFLAGS = -Wall -Wextra -std=c99
+OBJS = main.o char.o integer.o my_string.o
+TARGET = first_lab
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
+	$(CC) $(OBJS) -o $(TARGET)
 
-%.o: %.c $(DEPS)
-	$(CC) $(CFLAGS) -c $< -o $@
+main.o: main.c my_string.h
+	$(CC) $(CFLAGS) -c main.c
+
+char.o: char.c char.h
+	$(CC) $(CFLAGS) -c char.c
+
+integer.o: integer.c integer.h
+	$(CC) $(CFLAGS) -c integer.c
+
+my_string.o: my_string.c my_string.h
+	$(CC) $(CFLAGS) -c my_string.c
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f *.o $(TARGET)
