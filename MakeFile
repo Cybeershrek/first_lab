@@ -1,24 +1,16 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -std=c99
-OBJS = main.o char.o integer.o my_string.o
-TARGET = first_lab
+all: first_lab
 
-all: $(TARGET)
-
-$(TARGET): $(OBJS)
-	$(CC) $(OBJS) -o $(TARGET)
+first_lab: main.o char.o my_string.o
+	gcc main.o char.o my_string.o -o first_lab
 
 main.o: main.c my_string.h
-	$(CC) $(CFLAGS) -c main.c
+	gcc -c main.c
 
 char.o: char.c char.h
-	$(CC) $(CFLAGS) -c char.c
-
-integer.o: integer.c integer.h
-	$(CC) $(CFLAGS) -c integer.c
+	gcc -c char.c
 
 my_string.o: my_string.c my_string.h
-	$(CC) $(CFLAGS) -c my_string.c
+	gcc -c my_string.c
 
 clean:
-	rm -f *.o $(TARGET)
+	rm -f *o first_lab

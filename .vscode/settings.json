@@ -58,6 +58,12 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
     "my_string.h": "c",
-    "integer.h": "c"
+    "integer.h": "c",
+    "stdlib.h": "c",
+    "locale.h": "c",
+    "mytypeinfo.h": "c",
+    "stringerrors.h": "c",
+    "typeinfo.h": "c",
+    "char.h": "c"
   }
 }
