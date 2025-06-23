@@ -1,7 +1,10 @@
-all: first_lab
+all: first_lab tests
 
 first_lab: main.o char.o my_string.o
 	gcc main.o char.o my_string.o -o first_lab
+
+tests: tests.o char.o my_string.o
+	gcc tests.o char.o my_string.o -o tests
 
 main.o: main.c my_string.h
 	gcc -c main.c
@@ -12,5 +15,8 @@ char.o: char.c char.h
 my_string.o: my_string.c my_string.h
 	gcc -c my_string.c
 
+tests.o: tests.c my_string.h char.h
+	gcc -c tests.c
+
 clean:
-	rm -f *o first_lab
+	rm -f *.o first_lab tests

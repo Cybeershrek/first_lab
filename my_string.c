@@ -6,7 +6,7 @@
 
 my_string* create_string(TypeInfo* typeinfo, const void* data, StringErrors* error) {
     if (!data) {
-        *error = STRING_DOESNT_EXIST;
+        if (error) *error = STRING_DOESNT_EXIST;
         return NULL;
     }
     my_string* str = malloc(sizeof(my_string));
@@ -101,8 +101,10 @@ StringErrors splitting(const my_string* str, char delimiter, char*** parts, int*
     char delim_str[2] = {delimiter, '\0'};
     str->typeinfo->split(str->data, delim_str, parts);
     *count = 0;
-    while ((*parts)[*count] != NULL) {
-        (*count)++;
+    if (*parts) { 
+        while ((*parts)[*count] != NULL) {
+            (*count)++;
+        }
     }
     return STRING_OPERATION_OK;
 }
