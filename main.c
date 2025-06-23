@@ -10,12 +10,12 @@
 
 const char* error_to_string(StringErrors error) {
     switch (error) {
-        case STRING_OPERATION_OK: return "Успешно";
-        case STRING_DOESNT_EXIST: return "Строка не существует";
-        case MEMORY_ALLOCATION_FAILED: return "Ошибка выделения памяти";
-        case OPERATION_NOT_DEFINED: return "Операция не определена";
-        case INDEX_DOESNT_EXIST: return "Некорректные индексы";
-        default: return "Неизвестная ошибка";
+        case STRING_OPERATION_OK: return "Г“Г±ГЇГҐГёГ­Г®";
+        case STRING_DOESNT_EXIST: return "Г‘ГІГ°Г®ГЄГ  Г­ГҐ Г±ГіГ№ГҐГ±ГІГўГіГҐГІ";
+        case MEMORY_ALLOCATION_FAILED: return "ГЋГёГЁГЎГЄГ  ГўГ»Г¤ГҐГ«ГҐГ­ГЁГї ГЇГ Г¬ГїГІГЁ";
+        case OPERATION_NOT_DEFINED: return "ГЋГЇГҐГ°Г Г¶ГЁГї Г­ГҐ Г®ГЇГ°ГҐГ¤ГҐГ«ГҐГ­Г ";
+        case INDEX_DOESNT_EXIST: return "ГЌГҐГЄГ®Г°Г°ГҐГЄГІГ­Г»ГҐ ГЁГ­Г¤ГҐГЄГ±Г»";
+        default: return "ГЌГҐГЁГ§ГўГҐГ±ГІГ­Г Гї Г®ГёГЁГЎГЄГ ";
     }
 }
 
@@ -30,15 +30,15 @@ int main() {
     StringErrors error;
 
     while (1) {
-        printf("Выберите операцию:\n");
-        printf("1. Соединение строк\n");
-        printf("2. Перекодирование строки\n");
-        printf("3. Получение подстроки\n");
-        printf("4. Разделение строки\n");
-        printf("5. Поиск подстроки\n");
-        printf("6. Пояснения операций\n");
-        printf("0. Выход\n");
-        printf("Ваш выбор: ");
+        printf("Г‚Г»ГЎГҐГ°ГЁГІГҐ Г®ГЇГҐГ°Г Г¶ГЁГѕ:\n");
+        printf("1. Г‘Г®ГҐГ¤ГЁГ­ГҐГ­ГЁГҐ Г±ГІГ°Г®ГЄ\n");
+        printf("2. ГЏГҐГ°ГҐГЄГ®Г¤ГЁГ°Г®ГўГ Г­ГЁГҐ Г±ГІГ°Г®ГЄГЁ\n");
+        printf("3. ГЏГ®Г«ГіГ·ГҐГ­ГЁГҐ ГЇГ®Г¤Г±ГІГ°Г®ГЄГЁ\n");
+        printf("4. ГђГ Г§Г¤ГҐГ«ГҐГ­ГЁГҐ Г±ГІГ°Г®ГЄГЁ\n");
+        printf("5. ГЏГ®ГЁГ±ГЄ ГЇГ®Г¤Г±ГІГ°Г®ГЄГЁ\n");
+        printf("6. ГЏГ®ГїГ±Г­ГҐГ­ГЁГї Г®ГЇГҐГ°Г Г¶ГЁГ©\n");
+        printf("0. Г‚Г»ГµГ®Г¤\n");
+        printf("Г‚Г Гё ГўГ»ГЎГ®Г°: ");
         scanf("%d", &choice);
         getchar();
 
@@ -46,23 +46,23 @@ int main() {
         
         switch (choice) {
             case 1:
-                printf("Введите первую строку: ");
+                printf("Г‚ГўГҐГ¤ГЁГІГҐ ГЇГҐГ°ГўГіГѕ Г±ГІГ°Г®ГЄГі: ");
                 fgets(str1, MAX_LEN, stdin);
                 str1[strcspn(str1, "\n")] = '\0';
-                printf("Введите вторую строку: ");
+                printf("Г‚ГўГҐГ¤ГЁГІГҐ ГўГІГ®Г°ГіГѕ Г±ГІГ°Г®ГЄГі: ");
                 fgets(str2, MAX_LEN, stdin);
                 str2[strcspn(str2, "\n")] = '\0';
                 
                 mstr1 = create_string(GetCharTypeInfo(), str1, &error);
                 if (error != STRING_OPERATION_OK) {
-                    printf("Ошибка создания строки 1: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г±Г®Г§Г¤Г Г­ГЁГї Г±ГІГ°Г®ГЄГЁ 1: %s\n", error_to_string(error));
                     if (mstr1) free_string(mstr1);
                     break;
                 }
                 
                 mstr2 = create_string(GetCharTypeInfo(), str2, &error);
                 if (error != STRING_OPERATION_OK) {
-                    printf("Ошибка создания строки 2: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г±Г®Г§Г¤Г Г­ГЁГї Г±ГІГ°Г®ГЄГЁ 2: %s\n", error_to_string(error));
                     free_string(mstr1);
                     if (mstr2) free_string(mstr2);
                     break;
@@ -70,7 +70,7 @@ int main() {
                 
                 moutput = create_string(GetCharTypeInfo(), "", &error);
                 if (error != STRING_OPERATION_OK) {
-                    printf("Ошибка создания выходной строки: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г±Г®Г§Г¤Г Г­ГЁГї ГўГ»ГµГ®Г¤Г­Г®Г© Г±ГІГ°Г®ГЄГЁ: %s\n", error_to_string(error));
                     free_string(mstr1);
                     free_string(mstr2);
                     if (moutput) free_string(moutput);
@@ -79,9 +79,9 @@ int main() {
                 
                 error = concaten(mstr1, mstr2, moutput);
                 if (error == STRING_OPERATION_OK) {
-                    printf("Результат: %s\n", (char*)moutput->data);
+                    printf("ГђГҐГ§ГіГ«ГјГІГ ГІ: %s\n", (char*)moutput->data);
                 } else {
-                    printf("Ошибка операции: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г®ГЇГҐГ°Г Г¶ГЁГЁ: %s\n", error_to_string(error));
                 }
                 
                 free_string(mstr1);
@@ -91,20 +91,20 @@ int main() {
                 break;
 
             case 2:
-                printf("Введите строку для перекодирования: ");
+                printf("Г‚ГўГҐГ¤ГЁГІГҐ Г±ГІГ°Г®ГЄГі Г¤Г«Гї ГЇГҐГ°ГҐГЄГ®Г¤ГЁГ°Г®ГўГ Г­ГЁГї: ");
                 fgets(str1, MAX_LEN, stdin);
                 str1[strcspn(str1, "\n")] = '\0';
                 
                 mstr1 = create_string(GetCharTypeInfo(), str1, &error);
                 if (error != STRING_OPERATION_OK) {
-                    printf("Ошибка создания строки: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г±Г®Г§Г¤Г Г­ГЁГї Г±ГІГ°Г®ГЄГЁ: %s\n", error_to_string(error));
                     if (mstr1) free_string(mstr1);
                     break;
                 }
                 
                 moutput = create_string(GetCharTypeInfo(), "", &error);
                 if (error != STRING_OPERATION_OK) {
-                    printf("Ошибка создания выходной строки: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г±Г®Г§Г¤Г Г­ГЁГї ГўГ»ГµГ®Г¤Г­Г®Г© Г±ГІГ°Г®ГЄГЁ: %s\n", error_to_string(error));
                     free_string(mstr1);
                     if (moutput) free_string(moutput);
                     break;
@@ -112,9 +112,9 @@ int main() {
                 
                 error = recoding(mstr1, moutput);
                 if (error == STRING_OPERATION_OK) {
-                    printf("Результат: %s\n", (char*)moutput->data);
+                    printf("ГђГҐГ§ГіГ«ГјГІГ ГІ: %s\n", (char*)moutput->data);
                 } else {
-                    printf("Ошибка операции: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г®ГЇГҐГ°Г Г¶ГЁГЁ: %s\n", error_to_string(error));
                 }
                 
                 free_string(mstr1);
@@ -123,25 +123,25 @@ int main() {
                 break;
 
             case 3:
-                printf("Введите строку: ");
+                printf("Г‚ГўГҐГ¤ГЁГІГҐ Г±ГІГ°Г®ГЄГі: ");
                 fgets(str1, MAX_LEN, stdin);
                 str1[strcspn(str1, "\n")] = '\0';
-                printf("Введите начальный индекс: ");
+                printf("Г‚ГўГҐГ¤ГЁГІГҐ Г­Г Г·Г Г«ГјГ­Г»Г© ГЁГ­Г¤ГҐГЄГ±: ");
                 scanf("%d", &start);
-                printf("Введите конечный индекс: ");
+                printf("Г‚ГўГҐГ¤ГЁГІГҐ ГЄГ®Г­ГҐГ·Г­Г»Г© ГЁГ­Г¤ГҐГЄГ±: ");
                 scanf("%d", &end);
                 getchar();
                 
                 mstr1 = create_string(GetCharTypeInfo(), str1, &error);
                 if (error != STRING_OPERATION_OK) {
-                    printf("Ошибка создания строки: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г±Г®Г§Г¤Г Г­ГЁГї Г±ГІГ°Г®ГЄГЁ: %s\n", error_to_string(error));
                     if (mstr1) free_string(mstr1);
                     break;
                 }
                 
                 moutput = create_string(GetCharTypeInfo(), "", &error);
                 if (error != STRING_OPERATION_OK) {
-                    printf("Ошибка создания выходной строки: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г±Г®Г§Г¤Г Г­ГЁГї ГўГ»ГµГ®Г¤Г­Г®Г© Г±ГІГ°Г®ГЄГЁ: %s\n", error_to_string(error));
                     free_string(mstr1);
                     if (moutput) free_string(moutput);
                     break;
@@ -149,9 +149,9 @@ int main() {
                 
                 error = get_substring(mstr1, start, end, moutput);
                 if (error == STRING_OPERATION_OK) {
-                    printf("Подстрока: %s\n", (char*)moutput->data);
+                    printf("ГЏГ®Г¤Г±ГІГ°Г®ГЄГ : %s\n", (char*)moutput->data);
                 } else {
-                    printf("Ошибка операции: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г®ГЇГҐГ°Г Г¶ГЁГЁ: %s\n", error_to_string(error));
                 }
                 
                 free_string(mstr1);
@@ -160,30 +160,30 @@ int main() {
                 break;
 
             case 4:
-                printf("Введите строку для разделения: ");
+                printf("Г‚ГўГҐГ¤ГЁГІГҐ Г±ГІГ°Г®ГЄГі Г¤Г«Гї Г°Г Г§Г¤ГҐГ«ГҐГ­ГЁГї: ");
                 fgets(str1, MAX_LEN, stdin);
                 str1[strcspn(str1, "\n")] = '\0';
-                printf("Введите символ-разделитель: ");
+                printf("Г‚ГўГҐГ¤ГЁГІГҐ Г±ГЁГ¬ГўГ®Г«-Г°Г Г§Г¤ГҐГ«ГЁГІГҐГ«Гј: ");
                 delimiter = getchar();
                 getchar();
                 
                 mstr1 = create_string(GetCharTypeInfo(), str1, &error);
                 if (error != STRING_OPERATION_OK) {
-                    printf("Ошибка создания строки: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г±Г®Г§Г¤Г Г­ГЁГї Г±ГІГ°Г®ГЄГЁ: %s\n", error_to_string(error));
                     if (mstr1) free_string(mstr1);
                     break;
                 }
                 
                 error = splitting(mstr1, delimiter, &parts, &count);
                 if (error == STRING_OPERATION_OK) {
-                    printf("Результат разбиения (%d частей):\n", count);
+                    printf("ГђГҐГ§ГіГ«ГјГІГ ГІ Г°Г Г§ГЎГЁГҐГ­ГЁГї (%d Г·Г Г±ГІГҐГ©):\n", count);
                     for (int i = 0; i < count && parts[i] != NULL; i++) {
-                        printf("Часть %d: %s\n", i + 1, parts[i]);
+                        printf("Г—Г Г±ГІГј %d: %s\n", i + 1, parts[i]);
                         free(parts[i]);
                     }
                     free(parts);
                 } else {
-                    printf("Ошибка операции: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г®ГЇГҐГ°Г Г¶ГЁГЁ: %s\n", error_to_string(error));
                 }
                 
                 free_string(mstr1);
@@ -191,23 +191,23 @@ int main() {
                 break;
 
             case 5:
-                printf("Введите строку: ");
+                printf("Г‚ГўГҐГ¤ГЁГІГҐ Г±ГІГ°Г®ГЄГі: ");
                 fgets(str1, MAX_LEN, stdin);
                 str1[strcspn(str1, "\n")] = '\0';
-                printf("Введите подстроку для поиска: ");
+                printf("Г‚ГўГҐГ¤ГЁГІГҐ ГЇГ®Г¤Г±ГІГ°Г®ГЄГі Г¤Г«Гї ГЇГ®ГЁГ±ГЄГ : ");
                 fgets(str2, MAX_LEN, stdin);
                 str2[strcspn(str2, "\n")] = '\0';
                 
                 mstr1 = create_string(GetCharTypeInfo(), str1, &error);
                 if (error != STRING_OPERATION_OK) {
-                    printf("Ошибка создания строки 1: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г±Г®Г§Г¤Г Г­ГЁГї Г±ГІГ°Г®ГЄГЁ 1: %s\n", error_to_string(error));
                     if (mstr1) free_string(mstr1);
                     break;
                 }
                 
                 mstr2 = create_string(GetCharTypeInfo(), str2, &error);
                 if (error != STRING_OPERATION_OK) {
-                    printf("Ошибка создания строки 2: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г±Г®Г§Г¤Г Г­ГЁГї Г±ГІГ°Г®ГЄГЁ 2: %s\n", error_to_string(error));
                     free_string(mstr1);
                     if (mstr2) free_string(mstr2);
                     break;
@@ -216,11 +216,11 @@ int main() {
                 error = find_substring(mstr1, mstr2, &found);
                 if (error == STRING_OPERATION_OK) {
                     if (found)
-                        printf("Подстрока найдена.\n");
+                        printf("ГЏГ®Г¤Г±ГІГ°Г®ГЄГ  Г­Г Г©Г¤ГҐГ­Г .\n");
                     else
-                        printf("Подстрока не найдена.\n");
+                        printf("ГЏГ®Г¤Г±ГІГ°Г®ГЄГ  Г­ГҐ Г­Г Г©Г¤ГҐГ­Г .\n");
                 } else {
-                    printf("Ошибка операции: %s\n", error_to_string(error));
+                    printf("ГЋГёГЁГЎГЄГ  Г®ГЇГҐГ°Г Г¶ГЁГЁ: %s\n", error_to_string(error));
                 }
                 
                 free_string(mstr1);
@@ -229,24 +229,26 @@ int main() {
                 break;
                 
             case 6:
-                printf("\n===== Справка по операциям со строками =====\n");
-                printf("1. Сцепление строк - Объединение двух строк в одну\n");
-                printf("2. Перекодирование строки - Сдвиг каждого символа в ASCII на -1\n");
-                printf("3. Получение подстроки - Извлечение части строки по индексам\n");
-                printf("4. Разделение строки - Разбиение строки по разделителю\n");
-                printf("5. Поиск подстроки - Проверка наличия подстроки в строке\n");
-                printf("6. Справка - Показать эту информацию\n");
-                printf("0. Выход - Завершение программы\n");
+                printf("\n===== Г‘ГЇГ°Г ГўГЄГ  ГЇГ® Г®ГЇГҐГ°Г Г¶ГЁГїГ¬ Г±Г® Г±ГІГ°Г®ГЄГ Г¬ГЁ =====\n");
+                printf("1. Г‘Г¶ГҐГЇГ«ГҐГ­ГЁГҐ Г±ГІГ°Г®ГЄ - ГЋГЎГєГҐГ¤ГЁГ­ГҐГ­ГЁГҐ Г¤ГўГіГµ Г±ГІГ°Г®ГЄ Гў Г®Г¤Г­Гі\n");
+                printf("2. ГЏГҐГ°ГҐГЄГ®Г¤ГЁГ°Г®ГўГ Г­ГЁГҐ Г±ГІГ°Г®ГЄГЁ - Г‘Г¤ГўГЁГЈ ГЄГ Г¦Г¤Г®ГЈГ® Г±ГЁГ¬ГўГ®Г«Г  Гў ASCII Г­Г  -1\n");
+                printf("3. ГЏГ®Г«ГіГ·ГҐГ­ГЁГҐ ГЇГ®Г¤Г±ГІГ°Г®ГЄГЁ - Г€Г§ГўГ«ГҐГ·ГҐГ­ГЁГҐ Г·Г Г±ГІГЁ Г±ГІГ°Г®ГЄГЁ ГЇГ® ГЁГ­Г¤ГҐГЄГ±Г Г¬\n");
+                printf("4. ГђГ Г§Г¤ГҐГ«ГҐГ­ГЁГҐ Г±ГІГ°Г®ГЄГЁ - ГђГ Г§ГЎГЁГҐГ­ГЁГҐ Г±ГІГ°Г®ГЄГЁ ГЇГ® Г°Г Г§Г¤ГҐГ«ГЁГІГҐГ«Гѕ\n");
+                printf("5. ГЏГ®ГЁГ±ГЄ ГЇГ®Г¤Г±ГІГ°Г®ГЄГЁ - ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г Г«ГЁГ·ГЁГї ГЇГ®Г¤Г±ГІГ°Г®ГЄГЁ Гў Г±ГІГ°Г®ГЄГҐ\n");
+                printf("6. Г‘ГЇГ°Г ГўГЄГ  - ГЏГ®ГЄГ Г§Г ГІГј ГЅГІГі ГЁГ­ГґГ®Г°Г¬Г Г¶ГЁГѕ\n");
+                printf("0. Г‚Г»ГµГ®Г¤ - Г‡Г ГўГҐГ°ГёГҐГ­ГЁГҐ ГЇГ°Г®ГЈГ°Г Г¬Г¬Г»\n");
                 printf("===========================================\n");
                 break;
 
             case 0:
-                printf("Выход...\n");
+                printf("Г‚Г»ГµГ®Г¤...\n");
                 return 0;
 
             default:
-                printf("Неверный выбор. Попробуйте снова.\n");
+                printf("ГЌГҐГўГҐГ°Г­Г»Г© ГўГ»ГЎГ®Г°. ГЏГ®ГЇГ°Г®ГЎГіГ©ГІГҐ Г±Г­Г®ГўГ .\n");
         }
     }
     return 0;
 }
+
+//1)main С„Р°Р№Р» Сѓ РЅР°СЃ РїСѓСЃС‚РѕР№, Р·РґРµСЃСЊ РјС‹ С‚РѕР»СЊРєРѕ РІС‹Р·С‹РІР°РµРј РјРµРЅСЋ Рё С‚РµСЃС‚С‹
