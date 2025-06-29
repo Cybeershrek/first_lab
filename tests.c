@@ -84,13 +84,15 @@ void test_recoding() {
     
     my_string* input = create_string(GetCharTypeInfo(), "ABC123", &error);
     my_string* output = create_string(GetCharTypeInfo(), "", &error);
-    error = recoding(input, output);
+    int sh = 34;
+    int* shu = &sh;
+    error = recoding(input, shu, output);
     assert(error == STRING_OPERATION_OK);
     assert(strcmp((char*)output->data, "@AB012") == 0);
     assert(output->length == 6);
     free_string(input);
     input = create_string(GetCharTypeInfo(), "", &error);
-    error = recoding(input, output);
+    error = recoding(input, shu, output);
     assert(error == STRING_OPERATION_OK);
     assert(strcmp((char*)output->data, "") == 0);
     
@@ -129,21 +131,21 @@ void test_splitting() {
     printf("Running test_splitting... ");
     StringErrors error;
     
-    my_string* str = create_string(GetCharTypeInfo(), "apple,banana,cherry", &error);
+    my_string* str = create_string(GetCharTypeInfo(), ",,", &error);
     char** parts = NULL;
     int count = 0;
     error = splitting(str, ',', &parts, &count);
     assert(error == STRING_OPERATION_OK);
     assert(count == 3);
-    assert(strcmp(parts[0], "apple") == 0);
-    assert(strcmp(parts[1], "banana") == 0);
-    assert(strcmp(parts[2], "cherry") == 0);
+    assert(strcmp(parts[0], "") == 0);
+    assert(strcmp(parts[1], "") == 0);
+    assert(strcmp(parts[2], "") == 0);
     for (int i = 0; i < count; i++) free(parts[i]);
     free(parts);
     error = splitting(str, ';', &parts, &count);
     assert(error == STRING_OPERATION_OK);
     assert(count == 1);
-    assert(strcmp(parts[0], "apple,banana,cherry") == 0);
+    assert(strcmp(parts[0], ",,") == 0);
     
     for (int i = 0; i < count; i++) free(parts[i]);
     free(parts);
@@ -191,6 +193,48 @@ void test_memory_handling() {
     free_string(result);
     printf("Passed!\n");
 }
+void test_palindrome() {
+    printf("Running test_palindrome... ");
+    StringErrors error;
+    
+    my_string* str1 = create_string(GetCharTypeInfo(), "A man a plan a canal Panama", &error);
+    my_string* str2 = create_string(GetCharTypeInfo(), "Hello", &error);
+    my_string* str3 = create_string(GetCharTypeInfo(), "", &error);
+    my_string* str4 = create_string(GetCharTypeInfo(), "a", &error);
+    my_string* str5 = create_string(GetCharTypeInfo(), "  a  b  a  ", &error);
+    
+    int is_pal = 0;
+    
+    error = is_palindrome(str1, &is_pal);
+    assert(error == STRING_OPERATION_OK);
+    assert(is_pal == 1);
+    
+    error = is_palindrome(str2, &is_pal);
+    assert(error == STRING_OPERATION_OK);
+    assert(is_pal == 0);
+    
+    error = is_palindrome(str3, &is_pal);
+    assert(error == STRING_OPERATION_OK);
+    assert(is_pal == 1);
+    
+    error = is_palindrome(str4, &is_pal);
+    assert(error == STRING_OPERATION_OK);
+    assert(is_pal == 1);
+    
+    error = is_palindrome(str5, &is_pal);
+    assert(error == STRING_OPERATION_OK);
+    assert(is_pal == 1);
+    
+    free_string(str1);
+    free_string(str2);
+    free_string(str3);
+    free_string(str4);
+    free_string(str5);
+    
+    printf("Passed!\n");
+}
+
+
 
 int main() {
     printf("Starting unit tests...\n\n");
@@ -202,7 +246,7 @@ int main() {
     test_splitting();
     test_substring_search();
     test_memory_handling();
-    
+    test_palindrome();
     printf("\nAll tests passed successfully!\n");
     return 0;
 }

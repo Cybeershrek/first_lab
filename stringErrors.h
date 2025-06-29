@@ -8,6 +8,9 @@ typedef enum{
     STRING_NOT_DEFINED = 20,
     OPERATION_NOT_DEFINED = 21,
     INDEX_DOESNT_EXIST = 30,
+    SHIFT_IS_TOO_BIG = 31,
+    SHIFT_DOESNT_EXIST = 32,
+    PALINDROME_CHECK_FAILED = 40
 } StringErrors;
 
 #endif  

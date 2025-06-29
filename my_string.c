@@ -1,8 +1,6 @@
 #include "TypeInfo.h"
-#include "char.h"  
 #include "my_string.h"
-#include <stdlib.h>
-#include <string.h>
+
 
 my_string* create_string(TypeInfo* typeinfo, const void* data, StringErrors* error) {
     if (!data) {
@@ -37,6 +35,9 @@ void free_string(my_string* str) {
 }
 
 StringErrors concaten(const my_string* str1, const my_string* str2, my_string* result) {
+    if (!str1 || !str2 || !result)
+        return STRING_DOESNT_EXIST;
+    
     if (!str1->typeinfo || !str1->typeinfo->con) 
         return OPERATION_NOT_DEFINED;
     
@@ -54,7 +55,7 @@ StringErrors concaten(const my_string* str1, const my_string* str2, my_string* r
     return STRING_OPERATION_OK;
 }
 
-StringErrors recoding(const my_string* str, my_string* result) {
+StringErrors recoding(const my_string* str, const void* shift, my_string* result) {
     if (!str->typeinfo || !str->typeinfo->rec) 
         return OPERATION_NOT_DEFINED;
     
@@ -66,8 +67,18 @@ StringErrors recoding(const my_string* str, my_string* result) {
         }
         result->data = new_data;
     }
-    
-    str->typeinfo->rec(str->data, NULL, result->data);
+    const void* dat = str->data;
+    if (!shift) {
+        ((char*)result)[0] = '\0';
+        return SHIFT_DOESNT_EXIST;
+    }
+    int shif = *(const int*)shift;
+    for (size_t i = 0; required_length > i; i++){
+        if (((char*)dat)[i] < shif){
+            return SHIFT_IS_TOO_BIG;
+        } 
+    }
+    str->typeinfo->rec(str->data, shift, result->data);
     result->length = strlen((char*)result->data);
     return STRING_OPERATION_OK;
 }
@@ -114,5 +125,13 @@ StringErrors find_substring(const my_string* str, const my_string* substr, int* 
         return OPERATION_NOT_DEFINED;
     
     str->typeinfo->find_sub(str->data, substr->data, found);
+    return STRING_OPERATION_OK;
+}
+
+StringErrors is_palindrome(const my_string* str, int* result) {
+    if (!str->typeinfo || !str->typeinfo->is_palindrome) 
+        return OPERATION_NOT_DEFINED;
+    
+    str->typeinfo->is_palindrome(str->data, NULL, result);
     return STRING_OPERATION_OK;
 }

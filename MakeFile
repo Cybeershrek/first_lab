@@ -1,13 +1,16 @@
 all: first_lab tests
 
-first_lab: main.o char.o my_string.o
-	gcc main.o char.o my_string.o -o first_lab
+first_lab: main.o char.o my_string.o output.o
+	gcc main.o char.o my_string.o output.o -o first_lab
 
 tests: tests.o char.o my_string.o
 	gcc tests.o char.o my_string.o -o tests
 
 main.o: main.c my_string.h
 	gcc -c main.c
+
+output.o: output.c output.h
+	gcc -c output.c
 
 char.o: char.c char.h
 	gcc -c char.c
